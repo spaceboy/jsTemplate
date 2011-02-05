@@ -1,0 +1,37 @@
+jsTemplate
+==========
+
+A very simple templating system for work in the JavaScript environment. The function requires three parameters:
+ * template (string)
+ * values (JS object)
+ * flag determining the strictness of translation (optional, default = false)
+Returns a translated template (value).
+
+
+Template language:
+------------------
+
+Template "language" is very simple and resembles the composition string in PHP, Smarty template engine or any similar system - but without huge Samrty's functionality ;-)
+
+
+Simple replacement:
+{$key} tag is replaced by the value of the "key".
+Example:
+keyReplace('Lorem {$foo}', {foo: 'Ipsum'}) returns 'Lorem ipsum'.
+
+Conditional replacement:
+{?key}value{/key} returns "value" if "key" has any non-zero value.
+Examples:
+keyReplace('Lorem{?foo} ipsum{/foo}', {foo: true}) returns 'Lorem ipsum'.
+keyReplace('Lorem{?foo} ipsum{/foo}', {foo: false}) returns 'Lorem'.
+keyReplace('Lorem{?foo} ipsum{/foo}', {foo: 3.14}) returns 'Lorem ipsum'.
+keyReplace('Lorem{?foo} ipsum{/foo}', {foo: 0}) returns 'Lorem'.
+
+Conditional replacement with "else" statement:
+{?key}value1{:key}value2{/key} returns "value1" if "key" has any non-zero value and "value2" otherwise.
+Examples:
+keyReplace('Lorem {?foo}ipsum{:foo}dolor{/foo}', {foo: true}) returns 'Lorem ipsum'.
+keyReplace('Lorem {?foo}ipsum{:foo}dolor{/foo}', {foo: false}) returns 'Lorem dolor'.
+keyReplace('Lorem {?foo}ipsum{:foo}dolor{/foo}', {foo: 3.14}) returns 'Lorem ipsum'.
+keyReplace('Lorem {?foo}ipsum{:foo}dolor{/foo}', {foo: 0}) returns 'Lorem dolor'.
+
